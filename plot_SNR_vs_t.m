@@ -3,9 +3,9 @@
 % Author: Fernando Guiomar
 % Last Update: 19/03/2019
 
-clear;
-close all;
-clc;
+% clear;
+% close all;
+% clc;
 
 %% M-file Initialization
 addpath('.\functions\');
@@ -34,21 +34,26 @@ tMeas = tMeas(idx);
 SNR_dB = outPower - mean(outPower) + meanSNR_dB;
 
 %% Downsample
-dt = 10; % sampling period (s)
-K = 8*dt;
-% K = 1;
-tMeas = tMeas(1:K:end);
-SNR_dB = SNR_dB(1:K:end);
+% dt = 30; % sampling period (s)
+% K = 8*dt;
+% % K = 1;
+% tMeas = tMeas(1:K:end);
+% SNR_dB = SNR_dB(1:K:end);
 
 %% Track Power
-for n = 1:100
-    SNR_dB_est = estimate_meanSNR(SNR_dB,n);
-    idx = ~isnan(SNR_dB_est);
-    MSE(n) = mean((SNR_dB_est(idx)-SNR_dB(idx)).^2);
-end
-% return
-[~,idx] = min(MSE);
+% for n = 1:100
+%     SNR_dB_est = estimate_meanSNR(SNR_dB,n);
+%     idx = ~isnan(SNR_dB_est);
+%     MSE(n) = mean((SNR_dB_est(idx)-SNR_dB(idx)).^2);
+% end
+% % return
+% [~,idx] = min(MSE);
+tic
 SNR_dB_est = estimate_meanSNR(SNR_dB,idx);
+toc
+SNR_dB_est = estimatorGrad(SNR_dB);
+% estimate here SNR
+
 % plot(SNR_dB_est);
 % return 
 %% Remove Initial Transient
@@ -68,8 +73,8 @@ for n = 1:numel(SNR_dB_withMargin)
     upd(n);
 end
 meanCapacity = mean(AIR);
-% figure,plot(AIR);
-% title('AIR');
+figure,plot(AIR);
+title('AIR');
 %% Calculate NGMI for the Actual Channel SNR
 upd = textprogressbar(numel(SNR_dB),'updatestep',10,...
     'startmsg','Evaluating NGMI for Selected Entropies ',...
@@ -78,8 +83,8 @@ for n = 1:numel(SNR_dB)
     NGMI(n) = snr2gmi_PCS(SNR_dB(n),M_PCS,AIR(n));
     upd(n);
 end
-% figure,plot(NGMI);
-% title('NGMI');
+figure,plot(NGMI);
+title('NGMI');
 %% Calculate Supported Bit-Rates
 bitRate_opt = meanCapacity * symRate * nPol;
 bitRate_min = min(AIR) * symRate * nPol;
@@ -93,7 +98,7 @@ hPlot = plot(tMeas,SNR_dB);
 set(hPlot,'marker','none','Color',RGB.itblue,...
     'linewidth',1,'linestyle','-');
 
-hPlot = plot(tMeas,SNR_dB_est);
+hPlot = plot(tMeas,SNR_dB_est(2:end));
 set(hPlot,'marker','none','Color',RGB.itred,...
     'linewidth',1.7,'linestyle','-');
 
