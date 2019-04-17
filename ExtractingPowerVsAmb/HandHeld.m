@@ -17,13 +17,13 @@ clc;
     end
   
     out1 = instrfind('Type', 'serial')
-s2 = serial('COM3','BaudRate',115200,'Terminator','CR')
+s2 = serial('COM4','BaudRate',115200,'Terminator','CR')
 fopen(s2)
 
 %%
 
-numHour=2;
-TempSamp= 300;
+numHour=3;
+TempSamp= 180;%gert weather info each 3 min 
 samplingTime= 4; % 4 seconds beetween samples
 a=tic;
 for i=1:900*numHour % 1 HOUR
