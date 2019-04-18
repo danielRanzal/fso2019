@@ -11,9 +11,10 @@
 addpath('.\functions\');
 % Load custom colors:
 RGB = fancyColors();
+load('D:\Onedrive\OneDrive - Universidade de Aveiro\Last year\Tese\SNR estimation\NGMI_vs_time_adaptive\NGMI_vs_time_adaptive.mat')
 
-%% Input Parameters
-fileName = 'powerMeas_20-Mar-2019';
+% %% Input Parameters
+% fileName = 'powerMeas_20-Mar-2019';
 tMax = 3600*5;
 meanSNR_dB = 15;
 SNR_margin_dB = 2;
@@ -21,7 +22,7 @@ symRate = 32e9;
 nPol = 2;
 
 %% Load Results
-load(fileName);
+%load(fileName);
 % tMeas = tMeas(2:end);
 % tMeas = linspace(0,tMax,numel(outPower));
 
@@ -47,10 +48,10 @@ SNR_dB = outPower - mean(outPower) + meanSNR_dB;
 %     MSE(n) = mean((SNR_dB_est(idx)-SNR_dB(idx)).^2);
 % end
 % % return
-% [~,idx] = min(MSE);
-tic
-SNR_dB_est = estimate_meanSNR(SNR_dB,idx);
-toc
+% % [~,idx] = min(MSE);
+% tic
+% SNR_dB_est = estimate_meanSNR(SNR_dB,idx);
+% toc
 SNR_dB_est = estimatorGrad(SNR_dB);
 % estimate here SNR
 
@@ -62,7 +63,7 @@ SNR_dB = SNR_dB(idx+1:end);
 tMeas = tMeas(idx+1:end);
 
 %% Determine Maximum Capacity of the Link
-SNR_dB_withMargin = SNR_dB_est - SNR_margin_dB;
+SNR_dB_withMargin = double(SNR_dB_est - SNR_margin_dB);
 nGMIth = 0.9; %min threshold to still have signal
 M_PCS = 256; %constellation 
 upd = textprogressbar(numel(SNR_dB_withMargin),'updatestep',1,...
@@ -70,7 +71,7 @@ upd = textprogressbar(numel(SNR_dB_withMargin),'updatestep',1,...
     'endmsg','Done!','showactualnum',true);
 for n = 1:numel(SNR_dB_withMargin)
     AIR(n) = snr2air_PCS(SNR_dB_withMargin(n),nGMIth,M_PCS); %achievable information rate 
-    upd(n);
+%     upd(n);
 end
 meanCapacity = mean(AIR);
 figure,plot(AIR);
@@ -89,6 +90,8 @@ title('NGMI');
 bitRate_opt = meanCapacity * symRate * nPol;
 bitRate_min = min(AIR) * symRate * nPol;
 bitRate_gain = bitRate_opt - bitRate_min
+netSymbRate=(M_PCS*5/6*15/16)*1e9;
+bitRate_Gain= meanCapacity*netSymbRate*2;
 
 %% Plot Power versus Time
 figure();

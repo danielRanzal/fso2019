@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<b:Sources xmlns:b="http://schemas.openxmlformats.org/officeDocument/2006/bibliography" xmlns="http://schemas.openxmlformats.org/officeDocument/2006/bibliography">
+  <b:Source>
+    <b:Tag>willebrand-ghuman-2002-free-space-optics-:-enabling-optical-connectivity-in-today's-networks</b:Tag>
+    <b:SourceType>Book</b:SourceType>
+    <b:Title>Free space optics : enabling optical connectivity in today's networks</b:Title>
+    <b:Year>2002</b:Year>
+    <b:RefOrder>1</b:RefOrder>
+    <b:Author>
+      <b:Author>
+        <b:NameList>
+          <b:Person>
+            <b:First>Heinz.</b:First>
+            <b:Last>Willebrand</b:Last>
+          </b:Person>
+          <b:Person>
+            <b:First>Baksheesh S.</b:First>
+            <b:Last>Ghuman</b:Last>
+          </b:Person>
+        </b:NameList>
+      </b:Author>
+    </b:Author>
+    <b:Pages>259</b:Pages>
+    <b:StandardNumber>9780672322488</b:StandardNumber>
+    <b:Publisher>SAMS</b:Publisher>
+  </b:Source>
+</b:Sources>

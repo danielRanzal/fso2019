@@ -1,0 +1,43 @@
+- Introduction: what's FSO, why use it, applications-->advantage wrt mmWave (and weather resistence??).
+- FSO for high capacity integrate with OFC work and reference to it 
+- set up : photo/graph/instrumentation 
+- PROBLEM: channel variations -> graphs 
+- OUR SOLUTION : estimation to predict and exploit channel memory seen in OFC paper 
+- Adaptative trasmission + integration with weather forecast(??????) 
+- Conclusions + idea for next works?: we have demonstrated good work of predictor
+
+- introduction what's FSO, why use it, applications-->advantage wrt mmWave and weather resistence.
+- FSO for high capacity integrate with OFC work and reference to it 
+- set up : photo/graph/instrumentation
+- PROBLEM: channel variations -> graphs 
+- OUR SOLUTION : estimation to predict and exploit channel memory
+-distinction between 2 profiles to show that the estimators do a good job when there are lots of disconnections
+- Adaptative trasmission + integration with weather forecast 
+- Conclusions : we have demonstrated good work of predictor and stability of FSO 
+
+INTRODUCTION
+
+The increasing demand in capacity and high data rates don't fit well in the typical frequency spectrum, as this is every day more and more congested. Many applications rely on frequencies that are in very crowded bands and becasue of that we can't exploit a very big bandwidth. Researchers are trying to explore mmWave transmission but lack of sufficient useful distance can be obtained. 
+The use of FSO guarantess first of all an almost empty spectrum (THz) thus no interference with any other technology and the possibility of exploiting a very huge bandwidth and for many meters (with an added quality of being "water resistent"???). 
+The usage of FSO for high capacity purpose has already been presented [reference to OFC paper]. Analyzing data about this study, a particular channel behavior can be observed; in fact it seems that there is some kind of correlation among samples thus some kind of intrinsic memory of the channel. To exploit that we tried to develop some estimators, two of them we're going to present in this paper. 
+
+SET UP (photo, graphs,components) 
+The physical set up is pretty much the same as [OFC REF.] but the focus now is more on the raw power measurements.
+The transmitted optical power is provided by a EFC laser 2.5Gbps direct modulated source trasmitting at 1545.32-1546.12 nm. a SFP transceiver is used to convert electrical to optical signal(is it used??). 
+Two Thorlabs collimators (F810FC-1550) are used, one as transmitter and one as receiver
+A mirror(type of mirror with characteristics?) is used to reflect the signal back in order to simulate an overall trasmission of about 55m. 
+received power is then captured from the collimator to a simple power meter through a fiber. 
+
+
+CHANNEL FLUCTUATIONS 
+Dealing with FSO is completely different wrt wired optical transmissions where stability of power can be seen with the most simple power meter. In FSO, due to free space channel, the variations can be huge (graphs with spikes). That can be caused by anything interfering with the beam. anyway studying channel behavior a sort of general mean behavior can be seen and exploited as well. By taking a look at all the collected measurements some kind of correlation among samples can be observed and correlation analysis in provided in figures...
+
+SOLUTIONS 
+A mean estimator and a gradient descent is studied and applied to different power measurements obtained during different weather conditions (to check tracking capability even when huge drops of power because of rain). (formulas,graphs and recap table to highlight advantages and disadvantes and future work[to put in conclusions]). Channel estimation can be exploited to predict the optimal modulation and joint work can be done in the future thanks to arising interest in Probabilistic shaping modulations--> can we say so? (AS WE CAN'T SAY ANYTHING ABOUT ECOC ONE). The same thing can be done with weather forecast-->??(explain to get data from website ecc. ecc. + graphs)
+
+CONCLUSIONS 
+We have demonstrated how with two very simple estimator is possible to predict channel behavior and put ourselves in the best possible situation to exploit at most the channel capacity. In the meanwhile we have experienced the good behavior of the FSO in rainy conditions (no more than 3dB losses -> we should use the 15 april measurement and also the 458 meas.) and the possibility to relate atmospheric conditions with our channel..
+
+REFERENCES 
+1) OFC
+2) others? 
