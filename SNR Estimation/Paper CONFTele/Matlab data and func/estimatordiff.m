@@ -1,22 +1,13 @@
 % author Daniel Ranzal
 
-function [Estimative,MSE]=estimatorGrad(SNR_dB)
+function [Estimative,MSE]=estimatordiff(SNR_dB,taps)
+
 PrevError=1;
 count=1;
-% factor=0.01; % optimum val
-% factor1=0.17;   %optimum val
 StepSize=1;
-% factor1=0.7800; % promotes best result 0.1693
-% factor1=0.02;   % best for subtraction
 offset=1;
-taps=3;
-%% best 0.166
 factor=0.006;
 factor1=0.02;
-%%
-% for factor=0:0.001:0.02
-% for factor1=0:0.01:0.2
-% for taps=1:100
 
 Estimative(1:4)=SNR_dB(1:4);
 for sample=4:length(SNR_dB)
