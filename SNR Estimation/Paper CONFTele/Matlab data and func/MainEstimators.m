@@ -11,8 +11,9 @@ load('D:\Users\Pc\Documents\GitHub\fso2019\SNR Estimation\Paper CONFTele\Matlab 
 for nTaps=1:100
     for idx=1:length(power)
         [estFixedTaps(nTaps,:)] = estimate_meanSNR(power,nTaps);
-        MSE(nTaps)= mean((estFixedTaps(nTaps,idx)-power(idx)).^2);
+        
     end
+    MSE(nTaps)= mean((estFixedTaps(nTaps,2:end)-power(2:end)).^2);
 end
 [value,optTaps]=min(MSE)
 
@@ -38,8 +39,13 @@ optTapsD=12;
 %% Exposing Results
 % 
 
-% figure(),hold on, plot(power),plot(estFixedTaps),plot(dynamicTaps),plot(differential), ...
-% legend('Real power','Fixed number of Taps estimation','Differencial estimation'),hold off
-
+%% all on same graphs
 figure(),hold on,title('Power estimations'), plot(power),plot(estFixedTaps(optTaps,:)),plot(dynamicTaps),plot(differential), ...
-legend('Real power','Fixed number of Taps estimation','Differencial estimation'),hold off
+legend('Real power','Fixed number of Taps','Dynamic taps','Differential'),hold off
+
+figure(),hold on,title('Squared error of estimators'),plot((estFixedTaps(optTaps,:)-power).^2),plot((dynamicTaps-power).^2),plot((differential(2:end)-power).^2), ...
+legend('Fixed number of Taps estimation','Fixed number of Taps','Differential'),hold off
+
+%% subploting
+figure(),hold on,subplot(3,1,1),plot(estFixedTaps(optTaps,:))...
+,subplot(3,1,2),plot(dynamicTaps),subplot(3,1,3),plot(differential(2:end)),title('power'),hold off
