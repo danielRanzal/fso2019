@@ -27,7 +27,7 @@ outPower = outPower(idx);
 tMeas = tMeas(idx);
 
 %% Downsample
-dt = 5; % sampling period (s)
+dt = 60; % sampling period (s)
 K = 8*dt;
 % K = 1;
 tMeas = tMeas(1:K:end);
