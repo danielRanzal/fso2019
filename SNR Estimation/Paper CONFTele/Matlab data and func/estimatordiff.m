@@ -2,7 +2,7 @@
 
 function [Estimative,MSE]=estimatordiff(SNR_dB,taps)
 
-PrevError=1;
+PrevError=0;
 count=1;
 StepSize=1;
 offset=1;
@@ -11,7 +11,7 @@ factor1=0.02;
 
 Estimative(1:4)=SNR_dB(1:4);
 for sample=4:length(SNR_dB)
-    PrevError=factor1*(Estimative(sample)-SNR_dB(sample-1));
+    PrevError=factor1*(Estimative(sample)-SNR_dB(sample));
     StepSize=factor*(SNR_dB(sample)-SNR_dB(sample-1)); 
     if taps>= sample
         temp=taps;
@@ -19,17 +19,17 @@ for sample=4:length(SNR_dB)
         monitorTaps(sample)=taps;
     
         if StepSize>0   % if positive the step results increase
-            Estimative(sample+1) = (1/(1+StepSize-PrevError))*(sum(SNR_dB(sample-taps:sample))/(taps+1)); 
+            Estimative(sample+1) = (1*(1+StepSize+PrevError))*(sum(SNR_dB(sample-taps+1:sample))/(taps)); 
         else            % if negative the step increases negatively     %stepsize*PrevError instead of sum
-            Estimative(sample+1) =(sum(SNR_dB(sample-taps:sample))/((taps+1))*(1+StepSize-PrevError)); 
+            Estimative(sample+1) =(sum(SNR_dB(sample-taps+1:sample))/((taps))*(1+StepSize+PrevError)); 
         end
         taps=temp;
     else
         
          if StepSize>0   % if positive the step results increase
-            Estimative(sample+1) = (1/(1+StepSize-PrevError))*(sum(SNR_dB(sample-taps:sample))/(taps+1)); 
+            Estimative(sample+1) = (1/(1+StepSize+PrevError))*(sum(SNR_dB(sample-taps+1:sample))/(taps)); 
         else            % if negative the step increases negatively     %stepsize*PrevError instead of sum
-            Estimative(sample+1) =(sum(SNR_dB(sample-taps:sample))/((taps+1))*(1+StepSize-PrevError)); 
+            Estimative(sample+1) =(sum(SNR_dB(sample-taps+1:sample))/((taps))*1/(1+StepSize+PrevError)); 
          end     
         monitorTaps(sample)=taps;
 

@@ -24,7 +24,7 @@ end
 MSE_dynamic=mean((dynamicTaps(2:end)-power(2:end)).^2);
 
 %% Differencial estimator
-optTapsD=12;
+
 % MSEm=1;
 % for optTaps=1:100
 % [differential,MSE_diff]=estimatordiff(power,optTaps)
@@ -34,7 +34,7 @@ optTapsD=12;
 %     end
 %     
 % end
-[differential,MSE_diff]=estimatordiff(power,optTapsD)
+[differential,MSE_diff]=estimatordiff(power,optTaps)
 
 %% Exposing Results
 % 
@@ -47,5 +47,5 @@ figure(),hold on,title('Squared error of estimators'),plot((estFixedTaps(optTaps
 legend('Fixed number of Taps estimation','Fixed number of Taps','Differential'),hold off
 
 %% subploting
-figure(),hold on,subplot(3,1,1),plot(estFixedTaps(optTaps,:))...
-,subplot(3,1,2),plot(dynamicTaps),subplot(3,1,3),plot(differential(2:end)),title('power'),hold off
+% figure(),hold on,subplot(3,1,1),plot(estFixedTaps(optTaps,:))...
+% ,title('Fixed Taps'),subplot(3,1,2),plot(dynamicTaps),title('Dynamic estimator'),subplot(3,1,3),plot(differential(2:end)),title('Differential'),hold off
