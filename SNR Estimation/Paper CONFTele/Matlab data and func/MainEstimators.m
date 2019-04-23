@@ -52,6 +52,6 @@ figure(),hold on,subplot(3,1,1),hold on,plot(power),plot(estFixedTaps(optTaps,:)
 
 % error
 figure(),hold on,subplot(3,1,1),plot((estFixedTaps(optTaps,:)-power).^2)...
-,title('Fixed Taps'),subplot(3,1,2),plot(MSE_dynamic),title('Dynamic estimator'),subplot(3,1,3),plot((differential(2:end-2)-power(3:end)).^2),title('Differential'),hold off
+,title('Fixed Taps'),subplot(3,1,2),plot(MSE_dynamic),title('Dynamic estimator'),subplot(3,1,3),plot((differential(3:end-2)-power(3:end)).^2),title('Differential'),hold off
 
 
