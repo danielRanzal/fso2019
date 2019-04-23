@@ -5,10 +5,10 @@ clc
 
 
 %% loading Data
-load('D:\Users\Pc\Documents\GitHub\fso2019\SNR Estimation\Paper CONFTele\Matlab data and func\2_hours_meas_10_April.mat')
-
+% load('D:\Users\Pc\Documents\GitHub\fso2019\SNR Estimation\Paper CONFTele\Matlab data and func\2_hours_meas_10_April.mat')
+ %load('3_hours_meas_15_April.mat')
 %% Fixed Taps Estimator
-for nTaps=1:100
+for nTaps=1:20
     for idx=1:length(power)
         [estFixedTaps(nTaps,:)] = estimate_meanSNR(power,nTaps);
         
@@ -21,7 +21,7 @@ end
 
 %% Real time estimator
 [dynamicTaps]= realTimeEst(power);
-MSE_dynamic=mean((dynamicTaps(2:end)-power(2:end)).^2);
+MSE_dynamic=(dynamicTaps(2:end)-power(2:end)).^2;
 
 %% Differencial estimator
 
@@ -47,5 +47,11 @@ figure(),hold on,title('Squared error of estimators'),plot((estFixedTaps(optTaps
 legend('Fixed number of Taps estimation','Fixed number of Taps','Differential'),hold off
 
 %% subploting
-% figure(),hold on,subplot(3,1,1),plot(estFixedTaps(optTaps,:))...
-% ,title('Fixed Taps'),subplot(3,1,2),plot(dynamicTaps),title('Dynamic estimator'),subplot(3,1,3),plot(differential(2:end)),title('Differential'),hold off
+figure(),hold on,subplot(3,1,1),hold on,plot(power),plot(estFixedTaps(optTaps,:))...
+,title('Fixed Taps'),subplot(3,1,2),hold on,plot(power),plot(dynamicTaps),title('Dynamic estimator'),subplot(3,1,3),hold on,plot(power),plot(differential(2:end)),title('Differential'),hold off
+
+% error
+figure(),hold on,subplot(3,1,1),plot((estFixedTaps(optTaps,:)-power).^2)...
+,title('Fixed Taps'),subplot(3,1,2),plot(MSE_dynamic),title('Dynamic estimator'),subplot(3,1,3),plot((differential(2:end-2)-power(3:end)).^2),title('Differential'),hold off
+
+
