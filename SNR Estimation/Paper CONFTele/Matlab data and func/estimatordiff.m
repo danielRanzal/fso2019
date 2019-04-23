@@ -12,11 +12,13 @@ factor1=0.02;
 factor=1.0000e-03;
 factor1=0.0077;
 %optimized for 3 h rain
-% factor=0;
+% factor=9.999999999999999e-05;
+factor=0.0002;
+factor=0.0260;
 % factor1=0.01;
 % %
-% for factor1=0:1e-4:1e-1
-% for factor=0:1e-4:1e-1
+% for factor1=0:1e-3:1e-1
+ for factor=0:1e-6:1e-4
 
 Estimative(1:4)=SNR_dB(1:4);
 for sample=4:length(SNR_dB)
@@ -46,8 +48,11 @@ for sample=4:length(SNR_dB)
 end
     % a(count,:)=[factor,factor1];
     MSE(count)=mean((Estimative(5:end-2)-SNR_dB(5:end-1)).^2);
-    fact(count,:,:)=[factor,factor1];
-    count=count+1;% end 
+    fact(count)=factor;
+    fact1(count)=factor1;
+    count=count+1;% 
+
+% end 
 % end
 
     plot(MSE)
