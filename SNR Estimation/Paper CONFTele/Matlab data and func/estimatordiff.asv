@@ -10,7 +10,7 @@ factor=0.006;
 factor1=0.02;
 %optimized for 2 h sun
 factor=0.0697
-factor1=0.0002;
+factor
 %optimized for 3 h rain
 factor=0;
 factor1=0.01;
