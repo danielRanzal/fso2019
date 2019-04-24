@@ -13,7 +13,7 @@ factor=1.0000e-03;
 factor1=0.0077;
 %optimized for 3 h rain
 % factor=9.999999999999999e-05;
-factor=0.0002;
+factor=0.0001;
 factor=0.0260;
 % factor1=0.01;
 % %

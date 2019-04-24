@@ -13,10 +13,8 @@ for i=1:length(SNR_dB)
             end 
         idx2 = ~isnan(real_time_SNR_dB_est);
         MSE(n) = mean((real_time_SNR_dB_est(idx2)-a(idx2)).^2);
-        
         end
         [~,idx2] = min(MSE);
-%         taps(n)=idx2;
         for k = 1:numel(a)
                 idx = k-idx2:k-1;
                 idx = idx(idx>0);
@@ -34,16 +32,12 @@ for i=1:length(SNR_dB)
         MSE(n) = mean((real_time_SNR_dB_est(idx2)-a(idx2)).^2);
         end
         [~,idx2] = min(MSE);
-%         taps(n)=idx2;
         for k = (i-100+1):numel(a)
                 idx = k-idx2:k-1;
                 idx = idx(idx>0);
                 real_time_SNR_dB_est(k) = mean(a(idx));
         end       
-    end
-    if i>1
-        taps(i)=idx2;
-    end
+    end 
 end
 
 end

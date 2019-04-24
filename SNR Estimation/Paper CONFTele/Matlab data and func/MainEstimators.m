@@ -20,7 +20,7 @@ end
 % getting the best Number of Taps
 
 %% Real time estimator
-[dynamicTaps]= realTimeEst(power);
+[dynamicTaps,tapsD]= realTimeEst(power);
 MSE_dynamic=(dynamicTaps(2:end)-power(2:end)).^2;
 
 %% Differencial estimator
