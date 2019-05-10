@@ -63,48 +63,24 @@ for reg=1:1:length(lut)
         else if Power >= lut(reg+1,1)   % usual expectable case
                 
                 SNR = funct2snr(reg,Power);
-                %      disp(Power)
-                % disp(lut(reg,1))
-                % pause(1)
+        
                 break
                 
             end
         end
     end
-    %if Power<= lut(reg,1)
-    
-    % break
-end
 
 end
 
-
+end
 
 
 function snr = funct2snr(reg,power)
 load('lut.mat')
-% disp('This is the power received')
-% disp(power)
-% pause(1)
-% new aproach
-%     deltaP=abs(abs(lut(reg+1,1))-abs(lut(reg,1)));
-%     deltaSNR=abs(abs(lut(reg+1,2))-abs(lut(reg,2)));
 
-% b = lut(reg,1);% is the data inserted
-% m = (lut(reg+1,1)-lut(reg,1))/(lut(reg+1,3)-lut(reg,3));    % 
-% %     Data((idx-1)*75+1:(idx-1)*75+75)=m*(1:75)+b;
-% power = m*power+b;
-
-% perPower=abs(power/deltaP);
-
-    % going from power to snr
-    
-%     b = lut(reg,2);% is the data inserted
-%     m = (lut(reg+1,1)-lut(reg,1))/(lut(reg+1,3)-lut(reg,3));
     m = (lut(reg+1,2)-lut(reg,2))/(lut(reg+1,1)-lut(reg,1));% 
     b= lut(reg,2)-m*lut(reg,1);
     
-%     Data((idx-1)*75+1:(idx-1)*75+75)=m*(1:75)+b;
     snr = m*power+b; 
     
 end
