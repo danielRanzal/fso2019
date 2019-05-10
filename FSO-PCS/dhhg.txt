@@ -1,0 +1,7 @@
+include the attenuator code in PCS_0B2B no loop -> mean of 5 meas?
+
+300:350 bit rate
+
+two profile: ~
+automatic gain control on 
+automatic gain control off 

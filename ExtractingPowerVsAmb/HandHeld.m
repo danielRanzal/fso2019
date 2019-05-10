@@ -22,7 +22,7 @@ fopen(s2)
 
 %%
 
-numHour=3;
+numHour=2;
 TempSamp= 180;%gert weather info each 3 min 
 samplingTime= 4; % 4 seconds beetween samples
 a=tic;
@@ -60,10 +60,10 @@ out1(i,:) = fscanf(s2);
 %% end of handHeald
 
 
- if toc(a)>TempSamp    % sampling getAmb each 5 min (refresh on website at least 10 min
-    clim(i)=getAmb(); 
-    a=tic;
- end
+%  if toc(a)>TempSamp    % sampling getAmb each 5 min (refresh on website at least 10 min
+%     clim(i)=getAmb(); 
+%     a=tic;
+%  end
     
     while toc(b)< samplingTime     
     end

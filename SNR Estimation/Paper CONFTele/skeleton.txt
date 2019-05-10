@@ -1,3 +1,7 @@
+ERRATA CORRIGE: TOGLI SITO DA SET UP METTI SOLO "DATA FROM WEB"
+
+
+
 - Introduction: what's FSO, why use it, applications-->advantage wrt mmWave (and weather resistence??).
 - FSO for high capacity integrate with OFC work and reference to it 
 - set up : photo/graph/instrumentation 
