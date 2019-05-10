@@ -1,6 +1,6 @@
 % author Daniel Ranzal
 
-function [Estimative,MSE]=estimatordiff(SNR_dB,taps)
+function [Estimative,a]=estimatordiff(SNR_dB,taps)
 
 PrevError=0;
 count=1;
@@ -55,6 +55,6 @@ end
 % end 
 % end
 
-    plot(MSE)
-    [a b]=min(MSE)
+   % plot(MSE)
+    [a b]=min(MSE);
 end

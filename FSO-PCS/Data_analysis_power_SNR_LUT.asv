@@ -1,0 +1,108 @@
+% Data analysis power SNR lut 
+clear all;
+close all;
+clc;
+
+auto_gain=0; %to analyze data without automatic gain control insert 0
+    if auto_gain
+        load('power_SNR_LUT_AUTOGAIN');
+    else 
+        load('power_SNR_LUT_NO_AUTOGAIN');
+    end
+    
+    %% power
+    numSamples=length(Power_Monitor)
+    out=Power_Monitor;
+     for b=1:numSamples
+ if 0.5<sum(isstrprop(out(b).string,'digit')) % boolean vector isNumber
+     B = regexp(out(b).string,'\d*','Match');
+    B= str2double(B)
+    wave = B(1);
+    power(b) = (B(2)+(1E-2)*B(3));
+ else
+     power(b)=power(b-1);
+ end
+     
+ %aux = -(B(4)+(1E-2)*B(5));
+ end
+
+%% Averaging, and building lut
+     power_lin=10.^((power).*0.1);
+     Snr_lin=10.^((Snr_Monitor).*0.1);
+x=1;
+load('lut.mat');
+for y=0:5:75
+    
+    mean_power(x)=10*log10(mean(power_lin(1+y:5+y)));
+    
+    mean_SNR(x)=10*log10(mean(Snr_lin(1+y:5+y)));
+    SNR(x)=Lut(-mean_power(x),lut);
+    x=x+1;
+   
+end
+lut=[-mean_power;mean_SNR;i]';
+
+%% plot results
+figure,plot3(lut(:,1),lut(:,2),lut(:,3));
+grid on
+xlabel('power[dBm]');
+ylabel('SNR');
+zlabel('Attenuation[dB]');
+%%
+figure,hold on,plot(lut(:,1),lut(:,2)),plot(lut(:,1),SNR),hold off
+
+%% building lut
+function SNR =Lut(Power,lut)
+
+for reg=1:1:length(lut)
+    SNR=0;
+    if reg== length(lut)
+         SNR = funct2snr(reg-1,Power);
+         e
+    %if Power<= lut(reg,1)
+       if Power >= lut(reg+1,1)
+          
+        SNR = funct2snr(reg,Power);
+%      disp(Power)
+% disp(lut(reg,1))
+% pause(1)
+        break
+        
+     %  end
+    end
+    
+    % break
+end
+
+end
+
+
+
+
+function snr = funct2snr(reg,power)
+load('lut.mat')
+% disp('This is the power received')
+% disp(power)
+% pause(1)
+% new aproach
+%     deltaP=abs(abs(lut(reg+1,1))-abs(lut(reg,1)));
+%     deltaSNR=abs(abs(lut(reg+1,2))-abs(lut(reg,2)));
+
+% b = lut(reg,1);% is the data inserted
+% m = (lut(reg+1,1)-lut(reg,1))/(lut(reg+1,3)-lut(reg,3));    % 
+% %     Data((idx-1)*75+1:(idx-1)*75+75)=m*(1:75)+b;
+% power = m*power+b;
+
+% perPower=abs(power/deltaP);
+
+    % going from power to snr
+    
+%     b = lut(reg,2);% is the data inserted
+%     m = (lut(reg+1,1)-lut(reg,1))/(lut(reg+1,3)-lut(reg,3));
+    m = (lut(reg+1,2)-lut(reg,2))/(lut(reg+1,1)-lut(reg,1));% 
+    b= lut(reg,2)-m*lut(reg,1);
+    
+%     Data((idx-1)*75+1:(idx-1)*75+75)=m*(1:75)+b;
+    snr = m*power+b; 
+    
+end

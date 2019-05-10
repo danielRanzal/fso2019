@@ -8,13 +8,16 @@ clc
 % load('D:\Users\Pc\Documents\GitHub\fso2019\SNR Estimation\Paper CONFTele\Matlab data and func\2_hours_meas_10_April.mat')
  %load('3_hours_meas_15_April.mat')
 %% Fixed Taps Estimator
-for nTaps=1:20
+nTaps = 40; % imposing number of taps to be higher or lower then optimum
+%for nTaps=1:20
+power=SNR_dB;
+
     for idx=1:length(power)
         [estFixedTaps(nTaps,:)] = estimate_meanSNR(power,nTaps);
         
     end
     MSE(nTaps)= mean((estFixedTaps(nTaps,2:end)-power(2:end)).^2);
-end
+%end
 [value,optTaps]=min(MSE)
 
 % getting the best Number of Taps
