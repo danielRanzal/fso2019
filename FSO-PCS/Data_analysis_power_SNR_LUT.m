@@ -63,16 +63,22 @@ for reg=1:1:length(lut)
         else if Power >= lut(reg+1,1)   % usual expectable case
                 
                 SNR = funct2snr(reg,Power);
-        
+                %      disp(Power)
+                % disp(lut(reg,1))
+                % pause(1)
                 break
                 
             end
         end
     end
-
+    %if Power<= lut(reg,1)
+    
+    % break
 end
 
 end
+
+
 
 
 function snr = funct2snr(reg,power)
@@ -80,6 +86,6 @@ load('lut.mat')
     m = (lut(reg+1,2)-lut(reg,2))/(lut(reg+1,1)-lut(reg,1));% 
     b= lut(reg,2)-m*lut(reg,1);
     
+%     Data((idx-1)*75+1:(idx-1)*75+75)=m*(1:75)+b;
     snr = m*power+b; 
-    
 end

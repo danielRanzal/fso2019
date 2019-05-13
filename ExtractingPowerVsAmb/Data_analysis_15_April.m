@@ -178,12 +178,12 @@ PowerMax=max(power);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 figure()
 hold on
-plot(temp./tempMax)
-plot(hum./humMax)
-plot(win./windMax)
-plot(bar./barometerMax)
+% plot(temp./tempMax)
+% plot(hum./humMax)
+% plot(win./windMax)
+% plot(bar./barometerMax)
 % plot(today_rain./today_rainMax)
-% plot(rain_rate./rain_rateMax)
+plot(rain_rate./rain_rateMax)
 % plot(storm_total./stormMax)
 % plot(monthly_rain./monthRainMax)
 % plot(yearly_rain./yearRainMax)
@@ -195,7 +195,7 @@ plot(bar./barometerMax)
 % plot(sample_time./sampleTimeMax)
 plot(power./PowerMax)
 % plot(SNR_dB_est/max(SNR_dB_est));
-legend('Temp','humidity','wind','pressure','power')
+% legend('Temp','humidity','wind','pressure','power')
 title ('3 hours measurements 15 April');
 xlabel('4 seconds unit time [s]');
 ylabel('Normalized values');
